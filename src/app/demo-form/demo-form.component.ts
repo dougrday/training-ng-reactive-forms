@@ -34,7 +34,7 @@ export class DemoFormComponent {
     demoForm = new FormGroup({
         firstName: new FormControl('', { validators: [Validators.required, Validators.minLength(2)], updateOn: 'blur' }),
         lastName: new FormControl('', { validators: [Validators.required, Validators.minLength(2)], updateOn: 'blur' }),
-        interests: new FormControl({ value: [], disabled: true }, Validators.minLength(3)),
+        interests: new FormControl({ value: [], disabled: true }, [Validators.required, Validators.minLength(3)]),
         tellUsMore: new FormControl(false),
     });
 
