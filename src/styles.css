@@ -2,3 +2,7 @@ html, body, input, textarea {
     font-size: 18px;
     font-family: Flama;
 }
+
+div {
+    margin: 5px 0;
+}
