@@ -41,7 +41,7 @@ export class DemoFormComponent {
         tellUsMore: new FormControl(false),
     });
 
-    interestOptions = ['Basketball', 'Piano', 'Guitar', 'Hiking', 'Gaming'];
+    interestOptions = ['Basketball', 'Piano', 'Guitar', 'Hiking', 'Gaming', 'D&D'];
 
     get firstName() { return this.demoForm.get('firstName'); }
     get lastName() { return this.demoForm.get('lastName'); }
