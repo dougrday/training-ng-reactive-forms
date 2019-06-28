@@ -48,7 +48,12 @@ export class DemoFormComponent {
         // Enable/disable the interests area
         const shouldCheckInterests = this.demoForm.get('tellUsMore').value;
         const interests = this.demoForm.get('interests');
-        interests[shouldCheckInterests ? 'enable' : 'disable']();
+        if (shouldCheckInterests) {
+            interests.enable();
+        }
+        else {
+            interests.disable();
+        }
         interests.markAsUntouched();
     }
 
