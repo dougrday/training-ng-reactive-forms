@@ -30,28 +30,6 @@
     </div>
 
     <div>
-        <label>
-            Would you like to tell us more about yourself?
-            <input (change)="handleTellUsMoreChange()" type="radio" formControlName="tellUsMore" [value]="true" /> Yes
-            <input (change)="handleTellUsMoreChange()" type="radio" formControlName="tellUsMore" [value]="false" /> No
-        </label>
-    </div>
-
-    <div *ngIf="interests.enabled">
-        <label>
-            Interests
-            <mc-multi-select [options]="interestOptions" formControlName="interests">
-            </mc-multi-select>
-            <span>
-                <span class="info" *ngIf="interests.errors?.minlength">
-                    Please choose {{3-interests.value.length}} more
-                    {{(interests.value.length === 2 ? 'interest' : 'interests')}}.
-                </span>
-            </span>
-        </label>
-    </div>
-
-    <div>
         <button type="submit">Submit</button>
     </div>
 </form>

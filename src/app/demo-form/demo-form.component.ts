@@ -32,25 +32,12 @@ export class DemoFormComponent {
     constructor() { }
 
     demoForm = new FormGroup({
-        firstName: new FormControl('', { validators: [Validators.required, Validators.minLength(2)], updateOn: 'blur' }),
-        lastName: new FormControl('', { validators: [Validators.required, Validators.minLength(2)], updateOn: 'blur' }),
-        interests: new FormControl({ value: [], disabled: true }, Validators.minLength(3)),
-        tellUsMore: new FormControl(false),
+        firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+        lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     });
-
-    interestOptions = ['Basketball', 'Piano', 'Guitar', 'Hiking', 'Gaming'];
 
     get firstName() { return this.demoForm.get('firstName'); }
     get lastName() { return this.demoForm.get('lastName'); }
-    get interests() { return this.demoForm.get('interests'); }
-
-    handleTellUsMoreChange() {
-        // Enable/disable the interests area
-        const shouldCheckInterests = this.demoForm.get('tellUsMore').value;
-        const interests = this.demoForm.get('interests');
-        interests[shouldCheckInterests ? 'enable' : 'disable']();
-        interests.markAsUntouched();
-    }
 
     handleSubmit() {
         this.demoForm.markAllAsTouched();
