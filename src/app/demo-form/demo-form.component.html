@@ -1,0 +1,57 @@
+<form [formGroup]="demoForm" (ngSubmit)="handleSubmit()">
+    <div>
+        <label>
+            First Name:
+            <input type="text" formControlName="firstName">
+            <span class="error" *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+                <span *ngIf="firstName.errors.required">
+                    Please provide your first name.
+                </span>
+                <span *ngIf="firstName.errors.minlength">
+                    Please provide your full first name.
+                </span>
+            </span>
+        </label>
+    </div>
+
+    <div>
+        <label>
+            Last Name:
+            <input type="text" formControlName="lastName">
+            <span class="error" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+                <span *ngIf="lastName.errors.required">
+                    Please provide your last name.
+                </span>
+                <span *ngIf="lastName.errors.minlength">
+                    Please provide your full last name.
+                </span>
+            </span>
+        </label>
+    </div>
+
+    <div>
+        <label>
+            Would you like to tell us more about yourself?
+            <input (change)="handleTellUsMoreChange()" type="radio" formControlName="tellUsMore" [value]="true" /> Yes
+            <input (change)="handleTellUsMoreChange()" type="radio" formControlName="tellUsMore" [value]="false" /> No
+        </label>
+    </div>
+
+    <div *ngIf="interests.enabled">
+        <label>
+            Interests
+            <mc-multi-select [options]="interestOptions" formControlName="interests">
+            </mc-multi-select>
+            <span>
+                <span class="info" *ngIf="interests.errors?.minlength">
+                    Please choose {{3-interests.value.length}} more
+                    {{(interests.value.length === 2 ? 'interest' : 'interests')}}.
+                </span>
+            </span>
+        </label>
+    </div>
+
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>

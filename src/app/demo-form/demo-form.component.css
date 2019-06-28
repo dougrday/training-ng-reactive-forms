@@ -1,0 +1,9 @@
+.error {
+    color: red;
+    padding-left: 5px;
+}
+
+.info {
+    color: #0055cc;
+    padding-left: 5px;
+}

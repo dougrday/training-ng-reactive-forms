@@ -1,0 +1,6 @@
+<ng-container *ngFor="let option of options">
+    <label>
+        <input [disabled]="disabled" type="checkbox" [checked]="isChecked(option)" (click)="handleClick(option)" />
+        {{option}}
+    </label>
+</ng-container>
