@@ -37,10 +37,12 @@
         </label>
     </div>
 
-    <div *ngIf="interests.enabled">
+    <div *ngIf="interestsEnabled">
         <label>
             Interests
-            <mc-multi-select [options]="interestOptions" formControlName="interests">
+            <mc-multi-select
+                #interests
+                [options]="interestOptions">
             </mc-multi-select>
             <span>
                 <span class="info" *ngIf="interests.errors?.minlength">

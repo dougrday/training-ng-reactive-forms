@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
+import { MultiSelectComponent } from '../multi-select/multi-select.component';
 
 /**
  * Gets a list of all form errors contained within a form group,
@@ -29,12 +30,14 @@ function getFormErrors(group: FormGroup) {
     styleUrls: ['./demo-form.component.css']
 })
 export class DemoFormComponent {
+    @ViewChild('interests', { static: false }) interestsComponent: MultiSelectComponent;
+    interestsEnabled: boolean;
+
     constructor() { }
 
     demoForm = new FormGroup({
         firstName: new FormControl('', { validators: [Validators.required, Validators.minLength(2)], updateOn: 'blur' }),
         lastName: new FormControl('', { validators: [Validators.required, Validators.minLength(2)], updateOn: 'blur' }),
-        interests: new FormControl({ value: [], disabled: true }, Validators.minLength(3)),
         tellUsMore: new FormControl(false),
     });
 
@@ -42,14 +45,10 @@ export class DemoFormComponent {
 
     get firstName() { return this.demoForm.get('firstName'); }
     get lastName() { return this.demoForm.get('lastName'); }
-    get interests() { return this.demoForm.get('interests'); }
 
     handleTellUsMoreChange() {
         // Enable/disable the interests area
-        const shouldCheckInterests = this.demoForm.get('tellUsMore').value;
-        const interests = this.demoForm.get('interests');
-        interests[shouldCheckInterests ? 'enable' : 'disable']();
-        interests.markAsUntouched();
+        this.interestsEnabled = this.demoForm.get('tellUsMore').value;
     }
 
     handleSubmit() {
@@ -58,6 +57,7 @@ export class DemoFormComponent {
         if (this.demoForm.valid) {
             const value = this.demoForm.value;
             alert(JSON.stringify(value));
+            alert(JSON.stringify(this.interestsComponent.value));
         }
         else {
             alert("One or more errors occurred:\n" + JSON.stringify(getFormErrors(this.demoForm)));

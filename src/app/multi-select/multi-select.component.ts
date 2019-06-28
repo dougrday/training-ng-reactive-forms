@@ -1,23 +1,14 @@
-import { Component, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
     selector: 'mc-multi-select',
     templateUrl: './multi-select.component.html',
     styleUrls: ['./multi-select.component.css'],
-    providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: MultiSelectComponent,
-        multi: true,
-    }]
 })
-export class MultiSelectComponent implements ControlValueAccessor {
-    @Input() disabled: boolean;
-    onChange: (value: any[]) => void;
-    onTouched: () => void;
+export class MultiSelectComponent {
     @Input() options: any[];
     @Input() value: any[] = [];
+    @Output() valueChanged = new EventEmitter<any[]>();
 
     constructor() { }
 
@@ -30,27 +21,10 @@ export class MultiSelectComponent implements ControlValueAccessor {
             this.value.splice(index, 1);
         }
 
-        this.onTouched();
-        this.onChange(this.value);
+        this.valueChanged.emit(this.value);
     }
 
     isChecked(option) {
         return this.value.indexOf(option) !== -1;
-    }
-
-    registerOnChange(fn: (value: any[]) => void): void {
-        this.onChange = fn;
-    }
-
-    registerOnTouched(fn: () => void): void {
-        this.onTouched = fn;
-    }
-
-    setDisabledState?(isDisabled: boolean): void {
-        this.disabled = isDisabled;
-    }
-
-    writeValue(obj: any[]): void {
-        this.value = obj || [];
     }
 }
